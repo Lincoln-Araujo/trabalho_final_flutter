@@ -1,7 +1,7 @@
 # **Dog Browser App**
 
 ## **Descrição**
-O **Dog Browser App** é um aplicativo Flutter desenvolvido para listar raças de cães, utilizando a [The Dog API](https://thedogapi.com) para exibir informações e imagens. O app suporta navegação entre telas, salvamento de dados localmente para acesso offline e implementa boas práticas de segurança para proteger a API Key.
+O **Dog Browser App** é um aplicativo Flutter desenvolvido para listar raças de cães, utilizando a [The Dog API](https://thedogapi.com) para exibir informações e imagens. O app suporta navegação entre telas, salvamento de dados localmente para acesso offline e utiliza boas práticas de desenvolvimento.
 
 ---
 
@@ -12,7 +12,6 @@ O **Dog Browser App** é um aplicativo Flutter desenvolvido para listar raças d
 - Paginação com botões "Next" e "Previous" para navegação entre as páginas.
 - Dados armazenados localmente para acesso offline.
 - Integração com a **The Dog API**.
-- Ofuscação do código para distribuição.
 
 ---
 
@@ -39,46 +38,23 @@ Antes de iniciar, certifique-se de que as seguintes ferramentas estão instalada
 ### **3. Instalar o Xcode (macOS apenas)**
 - Para compilar no iOS, instale o Xcode pela App Store.
 - Aceite as licenças:
- 
+  ```bash
   sudo xcodebuild -license accept
- 
+  ```
 
 ### **4. Instalar Dependências do Projeto**
 - Clone o repositório:
- 
-  git clone <URL_DO_REPOSITORIO>
-  cd <NOME_DO_PROJETO>
- 
+  ```bash
+  git clone <https://github.com/Lincoln-Araujo/trabalho_final_flutter>
+  cd <trabalho_final_flutter>
+  ```
 - Instale as dependências:
-
+  ```bash
   flutter pub get
-  
+  ```
 
 ### **5. Configurar a API Key**
-- Crie uma conta na [The Dog API](https://thedogapi.com) e obtenha sua API Key.
-- Crie um arquivo `.env` na raiz do projeto e adicione:
- 
-  DOG_API_KEY=YOUR_API_KEY
-  
-- A API Key será carregada automaticamente através do pacote `flutter_dotenv`.
-
-### **6. Ativar Ofuscação do Código**
-- Edite o arquivo `android/app/proguard-rules.pro` e adicione as regras necessárias:
-  proguard
-  -keepattributes *Annotation*
-  -keep public class * extends androidx.lifecycle.ViewModel
-  -keep class io.flutter.app.** { *; }
-  -keep class io.flutter.plugins.** { *; }
-  
-- Garanta que a ofuscação está ativada no arquivo `build.gradle`:
-  gradle
-  buildTypes {
-      release {
-          minifyEnabled true
-          proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-      }
-  }
-  
+- Substitua a string `YOUR_API_KEY_HERE` no código pelo valor da sua API Key obtida na [The Dog API](https://thedogapi.com).
 
 ---
 
@@ -86,25 +62,26 @@ Antes de iniciar, certifique-se de que as seguintes ferramentas estão instalada
 
 ### **1. Executar em Modo Debug**
 - Para rodar no emulador Android:
-  
+  ```bash
   flutter run
- 
+  ```
 - Para rodar no iOS (macOS apenas):
-  
+  ```bash
   flutter run -d ios
- 
+  ```
 
 ### **2. Gerar APK para Produção**
 - Compile o aplicativo para produção:
-  
+  ```bash
   flutter build apk --release
-  
+  ```
 - O APK estará disponível em `build/app/outputs/flutter-apk/app-release.apk`.
 
 ---
 
 ## **Estrutura do Projeto**
 
+```
 lib/
 │
 ├── models/
@@ -118,21 +95,21 @@ lib/
 │   └── database_service.dart   # Serviço para banco de dados local.
 │
 └── main.dart               # Arquivo principal do Flutter.
-
+```
 
 ---
 
 ## **Testes**
 ### Executar testes unitários:
-
+```bash
 flutter test
-
+```
 
 ---
 
 ## **Considerações de Segurança**
-1. **Proteção da API Key:** A API Key está protegida no arquivo `.env` e não é incluída no repositório.
-2. **Ofuscação do Código:** O código final é ofuscado para produção.
+1. **Proteção da API Key:** A API Key é inserida diretamente no código durante o desenvolvimento. No futuro, recomenda-se utilizar um mecanismo para protegê-la, como o uso de arquivos `.env` ou serviços de configuração remota.
+2. **Ofuscação do Código:** Caso seja necessário, pode-se habilitar a ofuscação no arquivo `proguard-rules.pro`.
 
 ---
 
