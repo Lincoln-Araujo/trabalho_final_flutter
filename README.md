@@ -12,7 +12,7 @@ O **Dog Browser App** é um aplicativo Flutter desenvolvido para listar raças d
 - Paginação com botões "Next" e "Previous" para navegação entre as páginas.
 - Dados armazenados localmente para acesso offline.
 - Integração com a **The Dog API**.
-- Proteção da API Key e ofuscação do código para distribuição.
+- Ofuscação do código para distribuição.
 
 ---
 
