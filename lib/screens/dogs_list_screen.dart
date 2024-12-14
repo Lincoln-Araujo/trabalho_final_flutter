@@ -2,16 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../models/dog.dart';
-<<<<<<< HEAD
 import '../services/database_service.dart';
 import 'dog_details_screen.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:logger/logger.dart';
-=======
-import 'dog_details_screen.dart';
-import '../services/database_service.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
 
 class DogsListScreen extends StatefulWidget {
   const DogsListScreen({super.key});
@@ -21,10 +15,7 @@ class DogsListScreen extends StatefulWidget {
 }
 
 class _DogsListScreenState extends State<DogsListScreen> {
-<<<<<<< HEAD
   final DatabaseService _dbService = DatabaseService();
-=======
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
   List<Dog> dogs = [];
   List<Dog> filteredDogs = [];
   bool isLoading = false;
@@ -33,20 +24,12 @@ class _DogsListScreenState extends State<DogsListScreen> {
   final int limit = 12;
   int totalPages = 0;
   final TextEditingController _searchController = TextEditingController();
-<<<<<<< HEAD
   final Logger _logger = Logger();
-=======
-  final DatabaseService _dbService = DatabaseService();
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
 
   @override
   void initState() {
     super.initState();
     _loadLocalData();
-<<<<<<< HEAD
-=======
-    fetchDogs();
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
   }
 
   @override
@@ -55,7 +38,6 @@ class _DogsListScreenState extends State<DogsListScreen> {
     super.dispose();
   }
 
-<<<<<<< HEAD
   Future<void> _loadLocalData() async {
     if (kIsWeb) {
       await fetchDogs();
@@ -81,46 +63,18 @@ class _DogsListScreenState extends State<DogsListScreen> {
     }
   }
 
-=======
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
   void _filterDogs(String query) {
     setState(() {
       if (query.isEmpty) {
         filteredDogs = dogs;
       } else {
         filteredDogs = dogs
-<<<<<<< HEAD
             .where((dog) => dog.name.toLowerCase().contains(query.toLowerCase()))
-=======
-            .where(
-                (dog) => dog.name.toLowerCase().contains(query.toLowerCase()))
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
             .toList();
       }
     });
   }
 
-<<<<<<< HEAD
-=======
-  Future<void> _loadLocalData() async {
-    final localDogs = await _dbService.fetchDogs();
-    if (localDogs.isNotEmpty) {
-      setState(() {
-        dogs = localDogs;
-        filteredDogs = localDogs;
-      });
-    }
-  }
-
-  String getApiUrl(String endpoint) {
-    if (kIsWeb) {
-      // Use CORS proxy for web
-      return 'https://cors-anywhere.herokuapp.com/https://api.thedogapi.com$endpoint';
-    }
-    return 'https://api.thedogapi.com$endpoint';
-  }
-
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
   Future<void> fetchDogs() async {
     if (isLoading) return;
 
@@ -134,12 +88,7 @@ class _DogsListScreenState extends State<DogsListScreen> {
       final response = await http.get(
         uri,
         headers: {
-<<<<<<< HEAD
           'x-api-key': 'live_yc0NdOigxPjeFVXhXTPFptxFHrWOF9M3P66NXbCcWgZY4n0A8mPhBACDzga4xnEL',
-=======
-          'x-api-key':
-              'live_yc0NdOigxPjeFVXhXTPFptxFHrWOF9M3P66NXbCcWgZY4n0A8mPhBACDzga4xnEL',
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
           if (kIsWeb) 'Access-Control-Allow-Origin': '*',
         },
       );
@@ -161,35 +110,20 @@ class _DogsListScreenState extends State<DogsListScreen> {
           await fetchDogImages(dog);
         }
 
-<<<<<<< HEAD
         for (var dog in newDogs) {
           await _dbService.insertDog(dog, currentPage);
         }
 
-=======
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
         setState(() {
           dogs = newDogs;
           filteredDogs = newDogs;
           isLoading = false;
         });
-<<<<<<< HEAD
-=======
-
-        // Save to local database
-        for (var dog in newDogs) {
-          await _dbService.insertDog(dog);
-        }
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
       } else {
         throw Exception('Failed to load dogs: ${response.statusCode}');
       }
     } catch (e) {
-<<<<<<< HEAD
       _logger.e('Error in fetchDogs: $e');
-=======
-      print('Error in fetchDogs: $e');
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
       setState(() {
         isLoading = false;
         errorMessage = e.toString();
@@ -204,12 +138,7 @@ class _DogsListScreenState extends State<DogsListScreen> {
       final response = await http.get(
         uri,
         headers: {
-<<<<<<< HEAD
           'x-api-key': 'YOUR_API_KEY_HERE',
-=======
-          'x-api-key':
-              'live_yc0NdOigxPjeFVXhXTPFptxFHrWOF9M3P66NXbCcWgZY4n0A8mPhBACDzga4xnEL',
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
         },
       );
 
@@ -230,11 +159,7 @@ class _DogsListScreenState extends State<DogsListScreen> {
         }
       }
     } catch (e) {
-<<<<<<< HEAD
       _logger.e('Error fetching images for ${dog.name}: $e');
-=======
-      print('Error fetching images for ${dog.name}: $e');
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
     }
   }
 
@@ -242,14 +167,9 @@ class _DogsListScreenState extends State<DogsListScreen> {
     if (currentPage < totalPages - 1) {
       setState(() {
         currentPage++;
-<<<<<<< HEAD
 
       });
       _loadLocalData();
-=======
-      });
-      fetchDogs();
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
     }
   }
 
@@ -258,11 +178,7 @@ class _DogsListScreenState extends State<DogsListScreen> {
       setState(() {
         currentPage--;
       });
-<<<<<<< HEAD
       _loadLocalData();
-=======
-      fetchDogs();
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
     }
   }
 
@@ -347,23 +263,8 @@ class _DogsListScreenState extends State<DogsListScreen> {
 
   Widget _buildLoadingWidget() {
     return const Center(
-<<<<<<< HEAD
       child: CircularProgressIndicator(
         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-=======
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-          ),
-          SizedBox(height: 16),
-          Text(
-            'Loading dog breeds...',
-            style: TextStyle(fontSize: 16, color: Colors.white),
-          ),
-        ],
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
       ),
     );
   }
@@ -416,34 +317,12 @@ class _DogsListScreenState extends State<DogsListScreen> {
                   child: Image.network(
                     'https://images.weserv.nl/?url=${Uri.encodeComponent(dog.bestImageUrl)}',
                     fit: BoxFit.cover,
-<<<<<<< HEAD
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
                         color: Colors.grey[800],
                         child: const Icon(
                           Icons.error,
                           size: 40,
-=======
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Container(
-                        color: Colors.grey[800],
-                        child: const Center(
-                          child: CircularProgressIndicator(
-                            valueColor:
-                                AlwaysStoppedAnimation<Color>(Colors.white),
-                          ),
-                        ),
-                      );
-                    },
-                    errorBuilder: (context, error, stackTrace) {
-                      print('Error loading image: $error');
-                      return Container(
-                        color: Colors.grey[800],
-                        child: const Icon(
-                          Icons.pets,
-                          size: 30,
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
                           color: Colors.grey,
                         ),
                       );
@@ -454,20 +333,10 @@ class _DogsListScreenState extends State<DogsListScreen> {
             ),
             Expanded(
               flex: 1,
-<<<<<<< HEAD
               child: Center(
                 child: Text(
                   dog.name,
                   style: const TextStyle(
-=======
-              child: Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: Text(
-                  dog.name,
-                  style: const TextStyle(
-                    fontSize: 12,
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -485,7 +354,6 @@ class _DogsListScreenState extends State<DogsListScreen> {
 
   Widget _buildPaginationControls() {
     return Container(
-<<<<<<< HEAD
       color: Colors.grey[900],
       padding: const EdgeInsets.all(8),
       child: Row(
@@ -502,58 +370,6 @@ class _DogsListScreenState extends State<DogsListScreen> {
           ElevatedButton(
             onPressed: currentPage < totalPages - 1 ? nextPage : null,
             child: const Text('Next'),
-=======
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.grey[900],
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            blurRadius: 4,
-            offset: const Offset(0, -2),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ElevatedButton.icon(
-            onPressed: currentPage > 0 ? previousPage : null,
-            icon: const Icon(Icons.arrow_back),
-            label: const Text('Previous'),
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              backgroundColor: Colors.blue,
-              foregroundColor: Colors.white,
-              disabledBackgroundColor: Colors.blue.withOpacity(0.3),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
-              color: Colors.blue.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Text(
-              'Page ${currentPage + 1} of $totalPages',
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue,
-              ),
-            ),
-          ),
-          ElevatedButton.icon(
-            onPressed: currentPage < totalPages - 1 ? nextPage : null,
-            label: const Text('Next'),
-            icon: const Icon(Icons.arrow_forward),
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              backgroundColor: Colors.blue,
-              foregroundColor: Colors.white,
-              disabledBackgroundColor: Colors.blue.withOpacity(0.3),
-            ),
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
           ),
         ],
       ),
