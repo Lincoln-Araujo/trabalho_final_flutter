@@ -45,8 +45,8 @@ Antes de iniciar, certifique-se de que as seguintes ferramentas estão instalada
 ### **4. Instalar Dependências do Projeto**
 - Clone o repositório:
   ```bash
-  git clone <https://github.com/Lincoln-Araujo/trabalho_final_flutter>
-  cd <trabalho_final_flutter>
+  git clone https://github.com/Lincoln-Araujo/trabalho_final_flutter
+  cd trabalho_final_flutter
   ```
 - Instale as dependências:
   ```bash
