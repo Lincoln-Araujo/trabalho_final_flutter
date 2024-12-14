@@ -32,7 +32,10 @@ class Dog {
   String imageUrl;
   final String lifeSpan;
   List<DogImage> images;
+<<<<<<< HEAD
   int page; // Adicionado o atributo 'page'
+=======
+>>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
 
   Dog({
     required this.id,
@@ -42,7 +45,10 @@ class Dog {
     required this.imageUrl,
     required this.lifeSpan,
     this.images = const [],
+<<<<<<< HEAD
     this.page = 0, // Valor padrão para a página
+=======
+>>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
   });
 
   factory Dog.fromJson(Map<String, dynamic> json) {
