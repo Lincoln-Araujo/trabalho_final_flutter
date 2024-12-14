@@ -1,10 +1,7 @@
 import 'dart:async';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-<<<<<<< HEAD
 import 'package:flutter/foundation.dart' show kIsWeb;
-=======
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
 import '../models/dog.dart';
 
 class DatabaseService {
@@ -15,10 +12,7 @@ class DatabaseService {
   Database? _database;
 
   Future<Database> get database async {
-<<<<<<< HEAD
     if (kIsWeb) throw UnsupportedError('Local database is not supported on web.');
-=======
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
     if (_database != null) return _database!;
     _database = await _initDatabase();
     return _database!;
@@ -43,12 +37,8 @@ class DatabaseService {
         breed_group TEXT,
         temperament TEXT,
         image_url TEXT,
-<<<<<<< HEAD
         life_span TEXT,
         page INTEGER
-=======
-        life_span TEXT
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
       )
     ''');
 
@@ -64,12 +54,8 @@ class DatabaseService {
     ''');
   }
 
-<<<<<<< HEAD
   Future<void> insertDog(Dog dog, int page) async {
     if (kIsWeb) return;
-=======
-  Future<void> insertDog(Dog dog) async {
->>>>>>> 280d65d32295feb1bb24340978a9d8a1218ebcd9
     final db = await database;
 
     await db.insert(
